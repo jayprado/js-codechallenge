@@ -85,7 +85,7 @@ OPTIONAL BONUS
 - Replace `any` in the `*.stories.tsx`  files with appropriate types.
 --- [TASK] --- */
 
-/* --- [TASK] ---
+/* --- [TASK] --- ✅
  ReactDOM.render is no longer supported
 
 CURRENT SCENARIO
