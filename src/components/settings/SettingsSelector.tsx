@@ -4,7 +4,7 @@ import CountrySelect, { DEFAULT_COUNTRY } from "../country/CountrySelect";
 import LanguageSelect, { DEFAULT_LANGUAGE } from "../language/LanguageSelect";
 import CurrencySelect, { DEFAULT_CURRENCY } from "../currency/CurrencySelect";
 
-/* --- [TASK] ---
+/* --- [TASK] --- ✅
 Changes on modal are only applied on SAVE
 
 CURRENT SCENARIO
@@ -59,11 +59,11 @@ Improved use of TypeScript
 CURRENT SCENARIO
 - In `SettingsSelector`, there are individual `useState()` calls for `Country`, `Language`, and `Currency`.
 - Throughout the entire project, there are several instances of type `any`.
-    Example: 
+    Example:
     ```typescript
     ... = React.useState<any>(DEFAULT_COUNTRY);
     ```
-- Default values are constants that are exported by each component. 
+- Default values are constants that are exported by each component.
     Example:
     ```typescript
     .... { DEFAULT_COUNTRY } from "../country/CountrySelect";
@@ -96,10 +96,15 @@ FURTHER DETAILS
 // Component
 const SettingsSelector = (): JSX.Element => {
   // States
-  const [modalIsOpen, setModalIsOpen] = React.useState<any>(false);
-  const [selectedCountry, setCountry] = React.useState<any>(DEFAULT_COUNTRY);
-  const [selectedCurrency, setCurrency] = React.useState<any>(DEFAULT_CURRENCY);
-  const [selectedLanguage, setLanguage] = React.useState<any>(DEFAULT_LANGUAGE);
+  const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  const [selectedCountry, setCountry] = React.useState(DEFAULT_COUNTRY);
+  const [selectedCurrency, setCurrency] = React.useState(DEFAULT_CURRENCY);
+  const [selectedLanguage, setLanguage] = React.useState(DEFAULT_LANGUAGE);
+  const [stagedOptions, setStagedOptions] = React.useState({
+    country: DEFAULT_COUNTRY,
+    currency: DEFAULT_CURRENCY,
+    language: DEFAULT_LANGUAGE,
+  });
 
   // Render Counter
   const counter = useRef(0);
@@ -108,7 +113,13 @@ const SettingsSelector = (): JSX.Element => {
   const handleOpen = () => {
     setModalIsOpen(true);
   };
-  const handleClose = () => {
+  const handleSave = () => {
+    setCountry(stagedOptions.country);
+    setCurrency(stagedOptions.currency);
+    setLanguage(stagedOptions.language);
+    setModalIsOpen(false);
+  };
+  const handleCancel = () => {
     setModalIsOpen(false);
   };
 
@@ -138,16 +149,32 @@ const SettingsSelector = (): JSX.Element => {
         <h2>Select your region, currency and language.</h2>
 
         {/* Country */}
-        <CountrySelect value={selectedCountry} onChange={setCountry} />
+        <CountrySelect
+          value={stagedOptions.country}
+          onChange={(country) =>
+            setStagedOptions((options) => ({ ...options, country }))
+          }
+        />
 
         {/* Currency */}
-        <CurrencySelect value={selectedCurrency} onChange={setCurrency} />
+        <CurrencySelect
+          value={stagedOptions.currency}
+          onChange={(currency) =>
+            setStagedOptions((options) => ({ ...options, currency }))
+          }
+        />
 
         {/* Language */}
-        <LanguageSelect language={selectedLanguage} onChange={setLanguage} />
+        <LanguageSelect
+          language={stagedOptions.language}
+          onChange={(language) =>
+            setStagedOptions((options) => ({ ...options, language }))
+          }
+        />
 
         {/* Close button */}
-        <button onClick={handleClose}>Close</button>
+        <button onClick={handleSave}>Save</button>
+        <button onClick={handleCancel}>Cancel</button>
       </Modal>
     </div>
   );
