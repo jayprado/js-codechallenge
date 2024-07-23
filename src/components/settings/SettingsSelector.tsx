@@ -11,6 +11,8 @@ import {
   DEFAULT_CURRENCY,
 } from "../../constants";
 
+import "./SettingsSelector.css";
+
 /* --- [TASK] --- ✅
 Changes on modal are only applied on SAVE
 
@@ -43,7 +45,7 @@ FURTHER DETAILS
 - Be aware that #1 changes some relevant behaviour for this task
 --- [TASK] --- */
 
-/* --- [TASK] ---
+/* --- [TASK] --- ✅
 Improved layout and styling of modal dialog (CSS)
 
 CURRENT SCENARIO
@@ -147,7 +149,11 @@ const SettingsSelector = (): JSX.Element => {
       />
 
       {/* Modal */}
-      <Modal isOpen={modalIsOpen}>
+      <Modal
+        overlayClassName="settingsSelectorModalOverlay"
+        className="settingsSelectorModal"
+        isOpen={modalIsOpen}
+      >
         {/* Header */}
         <h2>Select your region, currency and language.</h2>
 
@@ -176,8 +182,14 @@ const SettingsSelector = (): JSX.Element => {
         />
 
         {/* Close button */}
-        <button onClick={handleSave}>Save</button>
-        <button onClick={handleCancel}>Cancel</button>
+        <div className="actions">
+          <button className="saveButton" onClick={handleSave}>
+            Save
+          </button>
+          <button className="cancelButton" onClick={handleCancel}>
+            Cancel
+          </button>
+        </div>
       </Modal>
     </div>
   );
