@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import Modal from "react-modal";
 
 import CountrySelect, { CountryValue } from "../country/CountrySelect";
@@ -28,7 +28,7 @@ FURTHER DETAILS
 - Positioning of the buttons within the modal is not in the scope of this task
 --- [TASK] --- */
 
-/* --- [TASK] ---
+/* --- [TASK] --- ✅
 Reduced number of unnecessary re-renders
 
 CURRENT SCENARIO
@@ -124,13 +124,10 @@ const SettingsSelector = (): JSX.Element => {
     language: DEFAULT_LANGUAGE,
   });
 
-  // Render Counter
-  const counter = useRef(0);
-
   // Actions
-  const handleOpen = () => {
+  const handleOpen = React.useCallback(() => {
     setModalIsOpen(true);
-  };
+  }, []);
   const handleSave = () => {
     setSelectedOptions(stagedOptions);
     setModalIsOpen(false);
@@ -139,26 +136,15 @@ const SettingsSelector = (): JSX.Element => {
     setModalIsOpen(false);
   };
 
-  const button = () => {
-    // Increase render count.
-    counter.current++;
-
-    // Log current render count.
-    console.log("Render count of button is: " + counter.current);
-
-    /* Button */
-    return (
-      <button onClick={handleOpen}>
-        {selectedOptions.country.name} - ({selectedOptions.currency} -{" "}
-        {selectedOptions.language})
-      </button>
-    );
-  };
+  const memoizedOptions = useMemo(() => selectedOptions, [selectedOptions]);
 
   // Render
   return (
     <div>
-      {button()}
+      <SettingsSelectorButton
+        handleOpen={handleOpen}
+        options={memoizedOptions}
+      />
 
       {/* Modal */}
       <Modal isOpen={modalIsOpen}>
@@ -196,5 +182,32 @@ const SettingsSelector = (): JSX.Element => {
     </div>
   );
 };
+
+interface SettingsSelectorButtonProps {
+  handleOpen: () => void;
+  options: OptionsState;
+}
+
+const SettingsSelectorButton = React.memo(
+  (props: SettingsSelectorButtonProps) => {
+    const { handleOpen, options } = props;
+
+    // Render Counter
+    const counter = useRef(0);
+
+    // Increase render count.
+    counter.current++;
+
+    // Log current render count.
+    console.log("Render count of button is: " + counter.current);
+
+    /* Button */
+    return (
+      <button onClick={handleOpen}>
+        {options.country.name} - ({options.currency} - {options.language})
+      </button>
+    );
+  }
+);
 
 export default SettingsSelector;
