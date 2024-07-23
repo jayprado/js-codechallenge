@@ -1,0 +1,9 @@
+.countrySelectOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.countrySelectOption > .countryFlag {
+  width: 24px;
+}

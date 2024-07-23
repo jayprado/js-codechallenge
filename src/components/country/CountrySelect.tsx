@@ -1,8 +1,14 @@
 import countries from "i18n-iso-countries";
-import Select from "react-select";
+import Select, { SingleValueProps } from "react-select";
 
-import { CountrySelectOption, CountryValue } from "./CountrySelectOption";
+import {
+  CountrySelectOption,
+  CountryValue,
+  CountryOption,
+} from "./CountrySelectOption";
 import { DEFAULT_COUNTRY } from "../../constants";
+
+import "./CountrySelect.css";
 
 // Register countries
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
@@ -30,7 +36,7 @@ export const CountrySelect = ({
       label: name,
     };
   });
-  const defaultValue = { value: value, label: value.name };
+  const defaultValue: CountryOption = { value: value, label: value.name };
 
   // Render
   return (
@@ -40,13 +46,35 @@ export const CountrySelect = ({
         <Select
           isMulti={false}
           options={data}
-          components={{ Option: CountrySelectOption }}
+          components={{
+            Option: CountrySelectOption,
+            SingleValue: CountrySelectSingleValue,
+          }}
           defaultValue={defaultValue}
           onChange={(newValue) => {
             if (newValue) onChange?.(newValue.value);
           }}
         />
       </label>
+    </div>
+  );
+};
+
+const CountrySelectSingleValue = (props: SingleValueProps<CountryOption>) => {
+  const { data } = props;
+  const style = props.getStyles("singleValue", props);
+  return (
+    <div
+      className="countrySelectSingleValue"
+      onClick={props.selectProps.onMenuOpen}
+      style={style as React.CSSProperties}
+    >
+      <img
+        alt={data.value.code}
+        src={`https://catamphetamine.gitlab.io/country-flag-icons/3x2/${data.value.code}.svg`}
+        className="countryFlag"
+      />
+      <span>{data.label}</span>
     </div>
   );
 };

@@ -1,0 +1,9 @@
+.countrySelectSingleValue {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.countrySelectSingleValue .countryFlag {
+  width: 24px;
+}
