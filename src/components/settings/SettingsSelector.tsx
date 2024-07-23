@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useRef } from "react";
 import Modal from "react-modal";
 
 import CountrySelect, { CountryValue } from "../country/CountrySelect";
@@ -138,14 +138,12 @@ const SettingsSelector = (): JSX.Element => {
     setModalIsOpen(false);
   };
 
-  const memoizedOptions = useMemo(() => selectedOptions, [selectedOptions]);
-
   // Render
   return (
     <div>
       <SettingsSelectorButton
         handleOpen={handleOpen}
-        options={memoizedOptions}
+        options={selectedOptions}
       />
 
       {/* Modal */}
