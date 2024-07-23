@@ -108,6 +108,12 @@ interface OptionsState {
   language: string;
 }
 
+const DEFAULT_OPTIONS: OptionsState = {
+  country: DEFAULT_COUNTRY,
+  currency: DEFAULT_CURRENCY,
+  language: DEFAULT_LANGUAGE,
+};
+
 // Props
 export interface SettingsSelectorProps {}
 
@@ -115,16 +121,10 @@ export interface SettingsSelectorProps {}
 const SettingsSelector = (): JSX.Element => {
   // States
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
-  const [selectedOptions, setSelectedOptions] = React.useState<OptionsState>({
-    country: DEFAULT_COUNTRY,
-    currency: DEFAULT_CURRENCY,
-    language: DEFAULT_LANGUAGE,
-  });
-  const [stagedOptions, setStagedOptions] = React.useState<OptionsState>({
-    country: DEFAULT_COUNTRY,
-    currency: DEFAULT_CURRENCY,
-    language: DEFAULT_LANGUAGE,
-  });
+  const [selectedOptions, setSelectedOptions] =
+    React.useState<OptionsState>(DEFAULT_OPTIONS);
+  const [stagedOptions, setStagedOptions] =
+    React.useState<OptionsState>(DEFAULT_OPTIONS);
 
   // Actions
   const handleOpen = React.useCallback(() => {
