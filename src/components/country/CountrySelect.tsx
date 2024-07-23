@@ -8,7 +8,7 @@ import {
 } from "./CountrySelectOption";
 import { DEFAULT_COUNTRY } from "../../constants";
 
-import "./CountrySelect.css";
+import styles from "./CountrySelect.module.css";
 
 // Register countries
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
@@ -65,14 +65,14 @@ const CountrySelectSingleValue = (props: SingleValueProps<CountryOption>) => {
   const style = props.getStyles("singleValue", props);
   return (
     <div
-      className="countrySelectSingleValue"
+      className={styles.countrySelectSingleValue}
       onClick={props.selectProps.onMenuOpen}
       style={style as React.CSSProperties}
     >
       <img
         alt={data.value.code}
         src={`https://catamphetamine.gitlab.io/country-flag-icons/3x2/${data.value.code}.svg`}
-        className="countryFlag"
+        className={styles.countryFlag}
       />
       <span>{data.label}</span>
     </div>

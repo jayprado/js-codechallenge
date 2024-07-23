@@ -26,26 +26,26 @@
   line-height: 1.5;
 }
 
-.settingsSelectorModal > .actions {
+.actions {
   display: flex;
   gap: 16px;
   margin-top: 32px;
 }
 
-.settingsSelectorModal > .actions > button {
+.actions > button {
   flex: 1;
   height: 40px;
   cursor: pointer;
 }
 
-.settingsSelectorModal > .actions > .saveButton {
+.actions > .saveButton {
   background-color: #2684ff;
   color: white;
   border: none;
   border-radius: 2px;
 }
 
-.settingsSelectorModal > .actions > .cancelButton {
+.actions > .cancelButton {
   background-color: rgba(0, 0, 0, 0.1);
   border: none;
   border-radius: 2px;
@@ -62,12 +62,12 @@
     border-radius: 8px;
   }
 
-  .settingsSelectorModal > .actions {
+  .actions {
     gap: 24px;
     margin-top: 24px;
   }
 
-  .settingsSelectorModal > .actions > button {
+  .actions > button {
     flex: 1;
     height: 40px;
   }

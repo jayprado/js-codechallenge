@@ -1,6 +1,6 @@
 import { OptionProps, components } from "react-select";
 
-import "./CountrySelectOption.css";
+import styles from "./CountrySelectOption.module.css";
 
 /* --- [TASK] --- ✅
 Country flags in select field
@@ -38,11 +38,11 @@ export const CountrySelectOption = (props: OptionProps<CountryOption>) => {
   } = props;
   return (
     <components.Option {...props}>
-      <div className="countrySelectOption">
+      <div className={styles.countrySelectOption}>
         <img
           alt={value.name}
           src={`https://catamphetamine.gitlab.io/country-flag-icons/3x2/${value.code}.svg`}
-          className="countryFlag"
+          className={styles.countryFlag}
         />
         <span>{value.name}</span>
       </div>

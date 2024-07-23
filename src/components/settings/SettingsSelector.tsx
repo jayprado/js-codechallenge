@@ -11,7 +11,7 @@ import {
   DEFAULT_CURRENCY,
 } from "../../constants";
 
-import "./SettingsSelector.css";
+import styles from "./SettingsSelector.module.css";
 
 /* --- [TASK] --- ✅
 Changes on modal are only applied on SAVE
@@ -150,8 +150,8 @@ const SettingsSelector = (): JSX.Element => {
 
       {/* Modal */}
       <Modal
-        overlayClassName="settingsSelectorModalOverlay"
-        className="settingsSelectorModal"
+        overlayClassName={styles.settingsSelectorModalOverlay}
+        className={styles.settingsSelectorModal}
         isOpen={modalIsOpen}
       >
         {/* Header */}
@@ -182,11 +182,11 @@ const SettingsSelector = (): JSX.Element => {
         />
 
         {/* Close button */}
-        <div className="actions">
-          <button className="saveButton" onClick={handleSave}>
+        <div className={styles.actions}>
+          <button className={styles.saveButton} onClick={handleSave}>
             Save
           </button>
-          <button className="cancelButton" onClick={handleCancel}>
+          <button className={styles.cancelButton} onClick={handleCancel}>
             Cancel
           </button>
         </div>
