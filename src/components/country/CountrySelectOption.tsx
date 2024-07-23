@@ -1,5 +1,6 @@
 import { OptionProps, components } from "react-select";
 
+import { getCountryFlagImgUrl } from "../../utils";
 import styles from "./CountrySelectOption.module.css";
 
 /* --- [TASK] --- ✅
@@ -41,7 +42,7 @@ export const CountrySelectOption = (props: OptionProps<CountryOption>) => {
       <div className={styles.countrySelectOption}>
         <img
           alt={value.name}
-          src={`https://catamphetamine.gitlab.io/country-flag-icons/3x2/${value.code}.svg`}
+          src={getCountryFlagImgUrl(value.code)}
           className={styles.countryFlag}
         />
         <span>{value.name}</span>

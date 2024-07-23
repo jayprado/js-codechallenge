@@ -7,6 +7,7 @@ import {
   CountryOption,
 } from "./CountrySelectOption";
 import { DEFAULT_COUNTRY } from "../../constants";
+import { getCountryFlagImgUrl } from "../../utils";
 
 import styles from "./CountrySelect.module.css";
 
@@ -71,7 +72,7 @@ const CountrySelectSingleValue = (props: SingleValueProps<CountryOption>) => {
     >
       <img
         alt={data.value.code}
-        src={`https://catamphetamine.gitlab.io/country-flag-icons/3x2/${data.value.code}.svg`}
+        src={getCountryFlagImgUrl(data.value.code)}
         className={styles.countryFlag}
       />
       <span>{data.label}</span>
