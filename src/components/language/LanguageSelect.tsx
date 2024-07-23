@@ -38,10 +38,11 @@ const LanguageSelect = ({
       <label>
         Language
         <Select
+          isMulti={false}
           options={data}
           defaultValue={defaultValue}
           onChange={(newValue) => {
-            onChange(newValue.value);
+            onChange?.(newValue?.value as string);
           }}
         />
       </label>

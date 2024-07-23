@@ -30,10 +30,11 @@ const CurrencySelect = ({
       <label>
         Currency
         <Select
+          isMulti={false}
           options={data}
           defaultValue={defaultValue}
           onChange={(newValue) => {
-            onChange(newValue.value);
+            onChange?.(newValue?.value as string);
           }}
         />
       </label>

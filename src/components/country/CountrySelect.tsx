@@ -42,11 +42,12 @@ export const CountrySelect = ({
       <label>
         Country
         <Select
+          isMulti={false}
           options={data}
           components={{ Option: CountrySelectOption }}
           defaultValue={defaultValue}
           onChange={(newValue) => {
-            onChange(newValue.value);
+            onChange?.(newValue?.value);
           }}
         />
       </label>
