@@ -19,8 +19,15 @@ FURTHER DETAILS
 - Flags appearing on the `SettingsSelector`-Button is optional
 --- [TASK] --- */
 
+export interface CountryValue {
+  code: string;
+  name: string;
+}
+
 // Component
-export const CountrySelectOption = (props: OptionProps<any>) => {
+export const CountrySelectOption = (
+  props: OptionProps<{ value: CountryValue; label: string }>
+) => {
   return (
     <div>
       <components.Option {...props} />

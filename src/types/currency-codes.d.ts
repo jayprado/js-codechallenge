@@ -1,11 +1,11 @@
 declare module "currency-codes/data" {
-  type Currency = {
+  interface CurrencyItem {
     code: string;
     number: string;
     digits: number;
     currency: string;
     countries: string[];
-  };
-  const currencyCodesData: Currency[];
+  }
+  const currencyCodesData: CurrencyItem[];
   export default currencyCodesData;
 }
